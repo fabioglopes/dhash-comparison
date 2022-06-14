@@ -1,0 +1,33 @@
+<div id="<%= dom_id image %>">
+  <p>
+    <%= image_tag "#{image.name}", style: 'width: 80px;' %>
+    <%= link_to image.name, images_path(image_to_compare_id: image.id) %>
+    Dhash:
+    <strong><%= image.dhash %></strong>
+    Dfingerprint:
+    <strong><%= image.dfingerprint %></strong>
+    |==
+    Hash
+    <strong><%= dhash_distance %></strong>
+    |
+    <%- if dhash_distance < 10 %>
+      Images are very similar < 10
+    <%- elsif dhash_distance < 20 %>
+      Images are slightly similar < 20
+    <%- else %>
+      Images are different
+    <%- end %>
+    |==
+    Fingerprint Hamming
+    <strong><%= dfinger_distance %></strong>
+    |
+    <%- if dfinger_distance < 20 %>
+      Images are very similar < 20
+    <%- elsif dfinger_distance < 25 %>
+      Images are slightly similar < 25
+    <%- else %>
+      Images are different
+    <%- end %>
+  </p>
+
+</div>
