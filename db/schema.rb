@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_170427) do
     t.string "dhash"
     t.string "dfingerprint"
     t.string "name"
+    t.string "ocr_string"
+    t.jsonb "ocr_to_box"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

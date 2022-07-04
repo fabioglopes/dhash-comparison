@@ -4,6 +4,8 @@ class CreateImages < ActiveRecord::Migration[7.0]
       t.string :dhash
       t.string :dfingerprint
       t.string :name
+      t.string :ocr_string
+      t.jsonb :ocr_to_box
 
       t.timestamps
     end

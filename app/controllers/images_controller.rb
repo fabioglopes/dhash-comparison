@@ -4,6 +4,12 @@ class ImagesController < ApplicationController
   # GET /images or /images.json
   def index
     @images = Image.all
+    @image_to_compare = Image.find(params[:image_to_compare_id])
+    @images = @images.map { |image| [image, DHashVips::DHash.hamming(image.dhash.to_i, @image_to_compare.dhash.to_i),
+                                DHashVips::DHash.hamming(image.dfingerprint.to_i, @image_to_compare.dfingerprint.to_i),
+                                image.ocr_string, image.ocr_to_box,
+                                     DamerauLevenshtein.distance(image.ocr_string, @image_to_compare.ocr_string)] }
+    @images_sorted = @images.sort { |a1, a2| a1[1].to_i <=> a2[1].to_i }
   end
 
   # GET /images/1 or /images/1.json

@@ -1,28 +1,20 @@
 <p style="color: green"><%= notice %></p>
 <h3>Image to Compare</h3>
 
-<%- image_to_compare = Image.find(params[:image_to_compare_id]) %>
-
-<%= image_tag "#{image_to_compare.name}", style: 'width: 80px;' %>
-<%= image_to_compare.name %>
+<%= image_tag "#{@image_to_compare.name}", style: 'width: 80px;' %>
+<%= @image_to_compare.name %>
 |
 Dhash:
-<strong><%= image_to_compare.dhash %></strong>
+<strong><%= @image_to_compare.dhash %></strong>
 Dfingerprint:
-<strong><%= image_to_compare.dfingerprint %></strong>
+<strong><%= @image_to_compare.dfingerprint %></strong>
 <hr>
 <div id="images">
-
-  <%- images = @images.map { |a| [a, DHashVips::DHash.hamming(a.dhash.to_i, image_to_compare.dhash.to_i), DHashVips::DHash.hamming(a.dfingerprint.to_i, image_to_compare.dfingerprint.to_i)] } %>
-
-  <% images_sorted = images.sort { |a1, a2| a1[1].to_i <=> a2[1].to_i } %>
-  <% images_sorted.each do |image| %>
+  <% @images_sorted.each do |image| %>
     <p>
-      <%= render partial: image[0], locals: { dhash_distance: image[1], dfinger_distance: image[2] } %>
+      <%= render partial: image[0], locals: { dhash_distance: image[1], dfinger_distance: image[2], ocr_string: image[3], ocr_to_box: image[4], words_distance: image[5] } %>
     </p>
   <% end %>
-
-
 </div>
 
-<%= link_to "New image", new_image_path %>
+

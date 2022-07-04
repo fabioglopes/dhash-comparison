@@ -1,6 +1,7 @@
 <div id="<%= dom_id image %>">
   <p>
     <%= image_tag "#{image.name}", style: 'width: 80px;' %>
+    <%= link_to 'Image Original', "images/#{image.name}", target: '_blank' %>
     <%= link_to image.name, images_path(image_to_compare_id: image.id) %>
     Dhash:
     <strong><%= image.dhash %></strong>
@@ -28,6 +29,23 @@
     <%- else %>
       Images are different
     <%- end %>
+    |
+    <strong>OCR String</strong>
+
+    <% if ocr_string == @image_to_compare.ocr_string %>
+      <p style="color:green"><%= ocr_string %></p>
+    <% else %>
+      <p style="color:red"><%= ocr_string %></p>
+    <% end %>
+  |
+  <strong>OCR Box</strong>
+  <% if ocr_to_box == @image_to_compare.ocr_to_box %>
+    <p style="color:green"><%= ocr_to_box %></p>
+  <% else %>
+    <p style="color:red"><%= ocr_to_box %></p>
+  <% end %>
+  Levenshtein
+  <b><%= words_distance %></b>
   </p>
 
 </div>
